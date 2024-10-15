@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from ind1 import People, validation  # Импортируем ваш код
+from ind1 import People, validation
 
 
 class TestPeople(unittest.TestCase):

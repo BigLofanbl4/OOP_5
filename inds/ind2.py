@@ -61,12 +61,17 @@ class People:
     def select(self, surname):
         result = People()
         for i in self.people:
-            if i.surname == surname:
-                result.add(i)
+            if i.get("surname") == surname:
+                result.add(
+                    i["surname"],
+                    i["name"],
+                    i.get("zodiac"),
+                    ".".join(i["birthday"]),
+                )
         return result
 
     def load(self, file_name):
-        with open(file_name, "r") as f:
+        with open(file_name, "r", encoding="utf-8") as f:
             people = json.load(f)
 
         if validation(people):
@@ -89,7 +94,7 @@ def validation(instance):
                 "birthday": {
                     "type": "array",
                     "items": {"type": "string"},
-                    "minitems": 3,
+                    "minItems": 3,
                 },
             },
             "required": ["surname", "name", "birthday"],
